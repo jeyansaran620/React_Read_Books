@@ -13,7 +13,7 @@ const ListBooks = (props) =>
                         <Book book={book} refreshBooks={props.refreshBooks}/>
                       </li>
                     )}
-                    </ol>
+                      </ol>
                   </div>
                 </div>
     )
