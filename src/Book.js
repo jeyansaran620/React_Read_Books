@@ -1,8 +1,13 @@
 import React, { Component} from 'react';
 import * as BooksAPI from './BooksAPI';
+import PropTypes from 'prop-types';
 
 class Book extends Component 
 {
+    static propTypes = {
+        book: PropTypes.array.isRequired,
+        refreshBooks : PropTypes.func.isRequired
+    }
     state = {
         shelf:'none'
     }
