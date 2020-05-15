@@ -8,14 +8,30 @@ class BooksApp extends React.Component {
   state = {
     books:[]
   }
-  GetBooks = () => 
+  GetBooks = (book,shelf) => 
   {
+    if(book && shelf)
+    {
+      let books=this.state.books;
+      books.forEach((oldBook) =>
+      {
+        if(book.id === oldBook.id)
+        {
+          oldBook.shelf=shelf
+        }
+      })
+      this.setState({
+        books
+      })
+    }
+    else {
     BooksAPI.getAll().then((books) =>
     {
      this.setState({
-       books:books
+       books
      })
     })
+  }
   }
   componentDidMount ()
   {

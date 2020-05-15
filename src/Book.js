@@ -17,7 +17,7 @@ class Book extends Component
             shelf
         })
         BooksAPI.update({id:this.props.book.id},shelf)
-        this.props.refreshBooks()
+        this.props.refreshBooks(this.state.book,shelf)
     }
     componentDidMount =() =>
     {
