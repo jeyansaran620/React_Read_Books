@@ -13,7 +13,7 @@ class Search extends Component
         query:'',
         books:[]
     }
-    handleQuery = (query) =>
+    handleQuery = async (query) =>
     {
         this.setState({
             query
@@ -23,8 +23,17 @@ class Search extends Component
         }
        else if(query.length>0)
         {
-        BooksAPI.search(query,20).then(books => {
+       await BooksAPI.search(query,20).then(books => {
             if(!books.error){
+                books.map((book)=>      
+                  this.props.books.forEach((Book)=> 
+                 { if(Book.id === book.id)
+                  {
+                       book.shelf=Book.shelf;
+                  }
+               }
+                 )
+                )
                 this.setState({books})
             }
             else

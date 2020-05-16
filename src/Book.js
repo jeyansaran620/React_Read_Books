@@ -1,8 +1,8 @@
-import React, { Component} from 'react';
+import React, { PureComponent} from 'react';
 import * as BooksAPI from './BooksAPI';
 import PropTypes from 'prop-types';
 
-class Book extends Component 
+class Book extends PureComponent 
 {
     static propTypes = {
         book: PropTypes.object.isRequired,
@@ -17,7 +17,7 @@ class Book extends Component
             shelf
         })
         BooksAPI.update({id:this.props.book.id},shelf)
-        this.props.refreshBooks(this.state.book,shelf)
+        this.props.refreshBooks()
     }
     componentDidMount =() =>
     {

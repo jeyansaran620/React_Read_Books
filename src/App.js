@@ -8,30 +8,14 @@ class BooksApp extends React.Component {
   state = {
     books:[]
   }
-  GetBooks = (book,shelf) => 
-  {
-    if(book && shelf)
-    {
-      let books=this.state.books;
-      books.forEach((oldBook) =>
-      {
-        if(book.id === oldBook.id)
-        {
-          oldBook.shelf=shelf
-        }
-      })
-      this.setState({
-        books
-      })
-    }
-    else {
-    BooksAPI.getAll().then((books) =>
+  GetBooks = async () => 
+  { 
+    await BooksAPI.getAll().then((books) =>
     {
      this.setState({
        books
      })
     })
-  }
   }
   componentDidMount ()
   {
@@ -43,7 +27,7 @@ class BooksApp extends React.Component {
       <Route path='/search' 
       render={() => 
         (
-          <Search refreshBooks={() => this.GetBooks()}/>
+          <Search books={this.state.books} refreshBooks={() => this.GetBooks()}/>
         )}
        />
         <Route exact path='/'>
@@ -53,9 +37,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-               <ListBooks books={this.state.books} ListType={"currentlyReading"} refreshBooks={() => this.GetBooks()}/>
-               <ListBooks books={this.state.books} ListType={"wantToRead"} refreshBooks={() => this.GetBooks()}/>
-               <ListBooks books={this.state.books} ListType={"read"} refreshBooks={() => this.GetBooks()}/>
+               <ListBooks books={this.state.books} ListType={"currentlyReading"}  refreshBooks={() => this.GetBooks()}/>
+               <ListBooks books={this.state.books} ListType={"wantToRead"}  refreshBooks={() => this.GetBooks()}/>
+               <ListBooks books={this.state.books} ListType={"read"}  refreshBooks={() => this.GetBooks()}/>
               </div>
             </div>
             <div className="open-search">
